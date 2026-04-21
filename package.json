@@ -1,7 +1,7 @@
 {
   "name": "codion-site",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.4",
+    "@radix-ui/react-tooltip": "^1.1.6",
+    "framer-motion": "^11.18.2",
     "gsap": "^3.15.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
