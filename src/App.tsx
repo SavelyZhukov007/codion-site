@@ -349,7 +349,7 @@ export default function App() {
 
       {/* NAV */}
       <motion.nav className="nav" initial={{ y: -72, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.55, delay: 0.15 }}>
-        {/* Theme toggle on the LEFT */}
+        {/* Theme toggle on the LEFT
         <div className="nav-left">
           <button className="theme-slider" onClick={() => setTheme(t => t === 'dark' ? 'light' : 'dark')} aria-label="Тема">
             <motion.div className="ts-knob" animate={{ x: theme === 'dark' ? 2 : 22 }} transition={{ type: 'spring', stiffness: 400, damping: 30 }} />
@@ -357,7 +357,7 @@ export default function App() {
             <span className="ts-icon ts-light">☀</span>
           </button>
         </div>
-
+ */}
         <div className="nav-logo">
           <span className="logo-bracket">[</span><span className="logo-text">CODION</span><span className="logo-bracket">]</span>
         </div>

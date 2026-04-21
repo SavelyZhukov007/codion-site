@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, color } from 'framer-motion'
 import { TEAM } from '../data'
 
 function Icon({ id, size = 14 }: { id: string; size?: number }) {
@@ -155,7 +155,7 @@ export function TeamSection() {
               {/* top bar */}
               <div className="ts-panel-topbar ts-mono">
                 <span className="ts-dim">CODION//DOSSIER</span>
-                <span style={{ color: member.color }}>ID:{String(member.id).padStart(3,'0')}</span>
+                <span style={{ color: member.color }}>ID:{String(member.id).padStart(3, '0')}</span>
                 <span className="ts-dim">STATUS:ACTIVE</span>
                 <span className="ts-blink" style={{ color: member.color }}>●</span>
               </div>
@@ -167,10 +167,10 @@ export function TeamSection() {
                   <div className="ts-photo-frame" style={{ '--mc': member.color } as React.CSSProperties}>
                     <img src={member.photo} alt={member.name} className="ts-photo" />
                     <div className="ts-photo-overlay" />
-                    {/* HUD lines on photo */}
+                    {/* HUD lines on photo 
                     <div className="ts-hud-h" />
-                    <div className="ts-hud-v" />
-                    <div className="ts-photo-badge ts-mono" style={{ color: member.color }}>
+                    <div className="ts-hud-v" />*/}
+                  <div className="ts-photo-badge ts-mono" style={{ color: 'white' }}>
                       {member.handle}
                     </div>
                   </div>
