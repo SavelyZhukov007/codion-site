@@ -1,6 +1,7 @@
-import { useEffect, useState, useCallback, useRef } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
 import './App.css'
+import { TeamSection } from './components/TeamSection'
 import { TEAM, STATS, SERVICES, STATIC_POSTS, TECH_TREE, loadCustomPosts } from './data'
 import type { BlogPost, TechNode } from './data'
 
@@ -36,10 +37,6 @@ function useScramble(target: string, delay = 0) {
 // ─── ICONS ──────────────────────────────────────────────────────────────────
 function Icon({ id, size = 16 }: { id: string; size?: number }) {
   return <svg width={size} height={size} aria-hidden="true"><use href={`/icons.svg#${id}`} /></svg>
-}
-function LinkIcon({ type }: { type: string }) {
-  const m: Record<string, string> = { gh: 'icon-github', tg: 'icon-telegram', li: 'icon-linkedin', web: 'icon-web', edu: 'icon-edu' }
-  return <Icon id={m[type] ?? 'icon-external'} />
 }
 
 // ─── CURSOR ─────────────────────────────────────────────────────────────────
@@ -96,120 +93,6 @@ function Reveal({ children, className, delay = 0 }: { children: React.ReactNode;
       viewport={{ once: true, margin: '-50px' }} custom={delay} variants={fadeUp}>
       {children}
     </motion.div>
-  )
-}
-
-// ─── TEAM SECTION ────────────────────────────────────────────────────────────
-function TeamSection() {
-  const [active, setActive] = useState<number | null>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const CARD_COUNT = TEAM.length
-
-  // On last card overflow: put it in second row
-  const [wrap, setWrap] = useState(false)
-  useEffect(() => {
-    const check = () => {
-      if (containerRef.current) {
-        setWrap(containerRef.current.clientWidth < 900)
-      }
-    }
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
-
-  return (
-    <section className="team-section" id="team">
-      <div className="container">
-        <Reveal className="section-header">
-          <span className="section-tag">01 / КОМАНДА</span>
-          <h2 className="section-title">Люди за кодом</h2>
-          <p className="section-sub">Наведи на карточку, чтобы развернуть</p>
-        </Reveal>
-        <div
-          ref={containerRef}
-          className={`team-grid ${wrap ? 'team-grid-wrap' : ''}`}
-          onMouseLeave={() => setActive(null)}
-        >
-          {TEAM.map((m, i) => {
-            const isActive = active === m.id
-            // const isIdle = active === null
-            const isOther = active !== null && active !== m.id
-            // last card wraps to new row
-            const isLast = i === CARD_COUNT - 1
-
-            return (
-              <motion.div
-                key={m.id}
-                className={`team-card ${isActive ? 'tc-active' : ''} ${isOther ? 'tc-other' : ''} ${isLast && wrap ? 'tc-last-row' : ''}`}
-                style={{ '--accent': m.color } as React.CSSProperties}
-                onMouseEnter={() => setActive(m.id)}
-                animate={{
-                  flex: isActive ? 2.4 : (isOther ? 0.6 : 1),
-                }}
-                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }}
-                custom={i} variants={fadeUp}
-              >
-                {/* Always visible header */}
-                <div className="tc-header">
-                  <div className="tc-num">0{m.id}</div>
-                  <div className="tc-avatar">
-                    <img src={m.photo} alt={m.name} />
-                    <div className="tc-ring" />
-                  </div>
-                </div>
-
-                {/* Name always visible */}
-                <div className="tc-name">{m.name}</div>
-                <div className={`tc-role ${isOther ? 'hidden-sm' : ''}`}>{m.role}</div>
-
-                {/* Collapsed: just tags */}
-                <motion.div
-                  className="tc-tags-only"
-                  animate={{ opacity: isOther ? 0.5 : 0, height: isOther ? 'auto' : 0 }}
-                  transition={{ duration: 0.3 }}
-                  style={{ overflow: 'hidden', pointerEvents: 'none' }}
-                >
-                  {m.stack.slice(0, 3).map(t => <span key={t} className="tag">{t}</span>)}
-                </motion.div>
-
-                {/* Expanded content */}
-                <motion.div
-                  className="tc-body"
-                  animate={{
-                    opacity: isActive ? 1 : 0,
-                    height: isActive ? 'auto' : 0,
-                    marginTop: isActive ? 12 : 0,
-                  }}
-                  transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-                  style={{ overflow: 'hidden' }}
-                >
-                  <p className="tc-bio">{m.bio}</p>
-                  <div className="tc-stack">
-                    {m.stack.map(t => <span key={t} className="tag">{t}</span>)}
-                  </div>
-                  {m.certs.length > 0 && (
-                    <div className="tc-certs">
-                      {m.certs.map(c => <span key={c} className="cert-badge"><Icon id="icon-medal" size={11} /> {c}</span>)}
-                    </div>
-                  )}
-                  <div className="tc-links">
-                    {m.links.map(l => (
-                      <a key={l.label} href={l.url} target="_blank" rel="noopener noreferrer" className="card-link" title={l.label}>
-                        <LinkIcon type={l.icon} /><span>{l.label}</span>
-                      </a>
-                    ))}
-                  </div>
-                </motion.div>
-
-                <div className="tc-glow" />
-              </motion.div>
-            )
-          })}
-        </div>
-      </div>
-    </section>
   )
 }
 
