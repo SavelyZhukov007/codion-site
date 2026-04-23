@@ -179,7 +179,7 @@ function BlogSection({ posts, onRead }: { posts: BlogPost[]; onRead: (p: BlogPos
       <div className="container">
         <Reveal className="section-header">
           <span className="section-tag">05 / БЛОГ</span>
-          <h2 className="section-title">Последние посты</h2>
+          <h2 className="section-title">Последние события</h2>
           <p className="section-sub">Делимся опытом, разборами задач и новостями команды</p>
         </Reveal>
 
@@ -308,7 +308,7 @@ export default function App() {
   const [readPost, setReadPost] = useState<BlogPost | null>(null)
   const [mobileMenu, setMobileMenu] = useState(false)
   const [customPosts] = useState<BlogPost[]>(loadCustomPosts)
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
+  const [theme] = useState<'dark' | 'light'>('dark')
   const [isMobile, setIsMobile] = useState(false)
 
   const allPosts = [...customPosts.slice().reverse(), ...STATIC_POSTS]
@@ -344,6 +344,7 @@ export default function App() {
 
   return (
     <div className={`root ${loaded ? 'loaded' : ''} theme-${theme}`}>
+
       <ScrollProgress />
       {!isMobile && <Cursor pos={cursor} hover={hover} theme={theme} />}
 
@@ -419,10 +420,12 @@ export default function App() {
             </div>
           ))}
         </motion.div>
-
+        {/* {
         <motion.div className="scroll-hint" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.2 }}>
           <span>scroll</span><div className="scroll-line" />
         </motion.div>
+} */}
+
       </section>
 
       {/* TEAM */}
@@ -438,7 +441,7 @@ export default function App() {
           </Reveal>
           <div className="project-layout">
             <Reveal className="project-text" delay={0.1}>
-              <p className="project-desc">KipLet — современная веб-платформа командной разработки Codion. Полный цикл: от архитектуры и базы данных до адаптивного интерфейса и деплоя.</p>
+              <p className="project-desc">KipLet — современная образовательная веб-платформа предоставляющая полный спектр услуг необходимый для этой отрасли, от дашбордов к каждой роли, до стримов. Полный цикл: от архитектуры и базы данных до адаптивного интерфейса и деплоя.</p>
               <ul className="project-features">
                 {['Современный React-фронтенд', 'FastAPI + PostgreSQL backend', 'JWT-аутентификация и безопасность', 'Docker-контейнеризация', 'Автотесты и QA-автоматизация', 'Аудит безопасности'].map((f, i) => (
                   <motion.li key={i} initial={{ opacity: 0, x: -18 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
@@ -449,6 +452,9 @@ export default function App() {
               <div className="project-team-line">
                 {TEAM.map(m => <span key={m.id} className="project-member" style={{ color: m.color }}>{m.name.split(' ')[0]}</span>)}
               </div>
+              <div className='toto'></div>
+              <a className='demo-href' href="http://test.codion.site">Демоверсия доступна тут</a>
+
             </Reveal>
             <Reveal className="project-visual" delay={0.18}>
               <div className="terminal">
@@ -462,7 +468,9 @@ export default function App() {
                     <div key={i} className="t-line t-out">✦ {l}</div>
                   ))}
                   <div className="t-line" style={{ marginTop: '0.4rem' }}><span className="t-prompt">$</span> npm run build</div>
-                  <div className="t-line t-success">✓ Build successful · 200+ commits</div>
+                  <div className="t-line" style={{ marginTop: '0.4rem' }}><span className="t-prompt">$</span> npx serve -s KipLet</div>
+                  <div className="t-line" style={{ marginTop: '0.4rem' }}><span className="t-prompt"></span></div>
+                  <div className="t-line t-success">✓ Build successful · 200+ hours</div>
                   <div className="t-line t-cursor">█</div>
                 </div>
               </div>
@@ -509,22 +517,40 @@ export default function App() {
           </Reveal>
           <Reveal delay={0.1}><p className="contact-desc">Есть идея или задача? Мы открыты к сотрудничеству. Напишите напрямую.</p></Reveal>
           <div className="contact-cards">
-            {TEAM.map((m, i) => (
-              <motion.a key={m.id} href={m.links.find(l => l.icon === 'tg')?.url || '#'}
+            {(
+              <motion.a href={'https://t.me/SavelyZhukovCode'}
                 target="_blank" rel="noopener noreferrer" className="contact-card"
-                style={{ '--accent': m.color } as React.CSSProperties}
+                style={{ '--accent': '#00FFB2' } as React.CSSProperties}
                 initial="hidden" whileInView="visible" viewport={{ once: true }}
-                custom={i} variants={fadeUp}
+                custom={1} variants={fadeUp}
                 whileHover={{ x: 5, transition: { duration: 0.2 } }}>
-                <div className="contact-photo"><img src={m.photo} alt={m.name} /></div>
+                <div className="contact-photo"><img src={'/savely.jpg'} alt={'Savely Zhukov'} /></div>
                 <div className="contact-info">
-                  <div className="contact-name">{m.name}</div>
-                  <div className="contact-role" style={{ color: m.color }}>{m.role}</div>
-                  <div className="contact-handle">{m.links.find(l => l.icon === 'tg')?.url?.replace('https://', '')}</div>
+                  <div className="contact-name">Савелий Жуков</div>
+                  <div className="contact-role" style={{ color: '#00FFB2' }}>{'Team Lead · Full Stack'}</div>
+                  <div className="contact-handle">{'@SavelyZhukovCode'}</div>
                 </div>
                 <div className="contact-arrow"><Icon id="icon-arrow-right" size={18} /></div>
               </motion.a>
-            ))}
+            )}
+          </div>
+          <div className="contact-cards">
+            {(
+              <motion.a href={'https://t.me/tWisty98'}
+                target="_blank" rel="noopener noreferrer" className="contact-card"
+                style={{ '--accent': '#A78BFF' } as React.CSSProperties}
+                initial="hidden" whileInView="visible" viewport={{ once: true }}
+                custom={1} variants={fadeUp}
+                whileHover={{ x: 5, transition: { duration: 0.2 } }}>
+                <div className="contact-photo"><img src={'/artem.jpg'} alt={'Artem Altunbaev'} /></div>
+                <div className="contact-info">
+                  <div className="contact-name">Артём Алтунбаев</div>
+                  <div className="contact-role" style={{ color: '#A78BFF' }}>{'Backend Developer · Sales'}</div>
+                  <div className="contact-handle">{'@tWisty98'}</div>
+                </div>
+                <div className="contact-arrow"><Icon id="icon-arrow-right" size={18} /></div>
+              </motion.a>
+            )}
           </div>
         </div>
       </section>

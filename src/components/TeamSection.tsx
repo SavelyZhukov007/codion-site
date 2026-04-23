@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence, color } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { TEAM } from '../data'
 
 function Icon({ id, size = 14 }: { id: string; size?: number }) {
