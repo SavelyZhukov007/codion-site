@@ -404,7 +404,7 @@ export default function App() {
             </motion.span>
           </h1>
           <motion.p className="hero-sub" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }}>
-            Превращаем идеи в рабочие продукты — быстро, безопасно, технологично.
+            Превращаем идеи в рабочие продукты.
           </motion.p>
           <motion.div className="hero-cta" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.65 }}>
             <a href="#team" className="btn-primary">Познакомиться</a>
@@ -436,7 +436,7 @@ export default function App() {
         <div className="project-inner container">
           <Reveal className="section-header">
             <span className="section-tag">02 / ПРОЕКТ</span>
-            <h2 className="section-title">KipLet</h2>
+            <h2 className="section-title"><p className='pizda'>©</p>KipLet</h2>
             <p className="section-sub project-tagline">Цифровой продукт, над которым работает команда прямо сейчас</p>
           </Reveal>
           <div className="project-layout">
@@ -470,7 +470,7 @@ export default function App() {
                   <div className="t-line" style={{ marginTop: '0.4rem' }}><span className="t-prompt">$</span> npm run build</div>
                   <div className="t-line" style={{ marginTop: '0.4rem' }}><span className="t-prompt">$</span> npx serve -s KipLet</div>
                   <div className="t-line" style={{ marginTop: '0.4rem' }}><span className="t-prompt"></span></div>
-                  <div className="t-line t-success">✓ Build successful · 200+ hours</div>
+                  <div className="t-line t-success">✓ Build successful · 1200+ hours</div>
                   <div className="t-line t-cursor">█</div>
                 </div>
               </div>
